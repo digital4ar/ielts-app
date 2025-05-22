@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" {% if lang == 'ar' %}dir="rtl"{% endif %}>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ t['title'] }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <form method="POST">
+            <label for="lang">{{ t['select_language'] }}</label>
+            <select name="lang" id="lang" onchange="this.form.submit()">
+                <option value="en" {% if lang == 'en' %}selected{% endif %}>English</option>
+                <option value="ar" {% if lang == 'ar' %}selected{% endif %}>العربية</option>
+            </select>
+        </form>
+
+        <h1>{{ t['title'] }}</h1>
+
+        {% if message %}
+        <p style="color: red; font-weight: bold;">{{ message }}</p>
+        {% endif %}
+
+        <form method="POST">
+            <input type="hidden" name="lang" value="{{ lang }}">
+            <label for="level">{{ t['level'] }}</label>
+            <select name="level" id="level" required>
+                <option value="">--</option>
+                <option value="Beginner">Beginner / مبتدئ</option>
+                <option value="Intermediate">Intermediate / متوسط</option>
+                <option value="Advanced">Advanced / متقدم</option>
+            </select>
+
+            <label for="target">{{ t['target'] }}</label>
+            <select name="target" id="target" required>
+                <option value="">--</option>
+                <option value="5.5">5.5</option>
+                <option value="6.0">6.0</option>
+                <option value="6.5">6.5</option>
+                <option value="7.0">7.0</option>
+                <option value="7.5+">7.5+</option>
+            </select>
+
+            <label for="test_type">{{ t['test_type'] }}</label>
+            <select name="test_type" id="test_type" required>
+                <option value="">--</option>
+                <option value="Academic">Academic / أكاديمي</option>
+                <option value="General Training">General / عام</option>
+            </select>
+
+            <label for="test_mode">{{ t['test_mode'] }}</label>
+            <select name="test_mode" id="test_mode" required>
+                <option value="">--</option>
+                <option value="Paper-based">Paper / ورقي</option>
+                <option value="Computer-based">Computer / كمبيوتر</option>
+                <option value="Online">Online / عبر الإنترنت</option>
+            </select>
+
+            <button type="submit">{{ t['generate'] }}</button>
+        </form>
+
+        {% if study_plan %}
+        <h2>{{ t['plan_header'] }}</h2>
+        <pre id="plan-text">{{ study_plan }}</pre>
+        <button onclick="copyPlan()">📋 {{ 'Copy Study Plan' if lang == 'en' else 'انسخ خطة الدراسة' }}</button>
+        {% endif %}
+
+        <hr>
+
+        {% if lang == 'ar' %}
+        <h3>🎁 موارد مجانية</h3>
+        <p>احصل على:</p>
+        <ul>
+            <li>📅 نموذج خطة دراسية أسبوعية</li>
+            <li>✅ قائمة مراجعة حسب المهارات</li>
+            <li>🔧 أدوات ومصادر مختارة من SparkSkyTech</li>
+        </ul>
+        <p>متوفرة في حزمة أدوات الآيلتس المجانية.</p>
+        <a href="{{ bonus_links.StarterKit }}" target="_blank">👉 احصل عليها الآن</a>
+
+        <hr>
+
+        <h3>💼 حزمة الإعداد الكاملة: Mastery IELTS Hub</h3>
+        <p>كل ما تحتاجه للإعداد الشامل لاختبار الآيلتس في مكان واحد:</p>
+        <ul>
+            <li>📘 شرح مفصّل لمهارات الآيلتس الأربعة: الاستماع، القراءة، الكتابة، والمحادثة</li>
+            <li>🛠 أدوات لتخطيط الدراسة وتتبع الإنجاز أسبوعًا بأسبوع</li>
+            <li>📚 مصادر خارجية موثوقة ومنظمة حسب كل مهارة</li>
+            <li>📄 نسخة قابلة للتخصيص (Notion Template)</li>
+            <li>🔑 تدريبات ودروس داعمة لرفع الدرجة:</li>
+            <ul>
+                <li>📘 قواعد اللغة الإنجليزية الضرورية للآيلتس</li>
+                <li>🧠 ٤٧ موضوعًا من مفردات الآيلتس مع تعريفات وأمثلة وتمارين</li>
+                <li>🗣 تدريبات على النطق الصحيح للكلمات والأسئلة</li>
+            </ul>
+        </ul>
+        <a href="{{ bonus_links.HubShop }}" target="_blank">🔍 معاينة وشراء الحزمة</a>
+        {% else %}
+        <h3>🎁 Free IELTS Tools</h3>
+        <p>Get instant access to:</p>
+        <ul>
+            <li>📅 Weekly Study Plan Template</li>
+            <li>✅ Skill-by-Skill IELTS Checklist</li>
+            <li>🔧 SparkSkyTech's Best IELTS Resources</li>
+        </ul>
+        <p>All included in your free IELTS Prep Kit.</p>
+        <a href="{{ bonus_links.StarterKit }}" target="_blank">👉 Access the Kit</a>
+
+        <hr>
+
+        <h3>💼 Complete IELTS Prep Package: Mastery IELTS Hub</h3>
+        <p>Your all-in-one system to confidently prepare for the IELTS exam:</p>
+        <ul>
+            <li>📘 Full breakdown of Listening, Reading, Writing, and Speaking sections</li>
+            <li>🛠 Study planning tools + weekly tracking templates</li>
+            <li>📚 Curated external resources sorted by skill</li>
+            <li>📄 Editable Notion template to organize your journey</li>
+            <li>🔑 Bonus supporting skill modules to boost your score:</li>
+            <ul>
+                <li>📘 Essential IELTS Grammar explained with practice</li>
+                <li>🧠 47 IELTS Vocabulary Topics with definitions, examples, and exercises</li>
+                <li>🗣 Pronunciation exercises to improve clarity and confidence</li>
+            </ul>
+        </ul>
+        <a href="{{ bonus_links.HubShop }}" target="_blank">🔍 Preview before purchase & access the full package</a>
+        {% endif %}
+    </div>
+
+    <script>
+        function copyPlan() {
+            const planText = document.getElementById("plan-text");
+            if (planText) {
+                navigator.clipboard.writeText(planText.innerText)
+                    .then(() => {
+                        alert("✅ {{ 'Study plan copied!' if lang == 'en' else 'تم نسخ خطة الدراسة!' }}");
+                    })
+                    .catch(err => {
+                        alert("❌ Failed to copy text: " + err);
+                    });
+            }
+        }
+    </script>
+</body>
+</html>

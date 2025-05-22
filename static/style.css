@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    font-size: 18px; /* increased base font */
+    line-height: 1.7; /* more vertical spacing */
+    direction: ltr;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #0077cc;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+
+pre {
+    background-color: #f0f0f0;
+    padding: 20px;
+    white-space: pre-wrap;
+    border-radius: 6px;
+    font-size: 18px;
+    line-height: 1.8;
+    direction: inherit;
+}
+
+ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+h1, h2, h3 {
+    color: #003366;
+    font-weight: bold;
+}
+
+/* RTL support for Arabic */
+html[dir="rtl"] body {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="rtl"] select,
+html[dir="rtl"] button,
+html[dir="rtl"] label {
+    text-align: right;
+}
